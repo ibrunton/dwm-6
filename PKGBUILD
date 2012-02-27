@@ -36,6 +36,7 @@ build() {
   patch -Np1 -i $srcdir/02-dwm-6.0-push.diff
   patch -Np1 -i $srcdir/08-dwm-6.0-clicktofocus.diff
   patch -Np1 -i $srcdir/centredfloating.diff
+  patch -Np1 -i $srcdir/15-dwm-6.0-centred-floating.diff
   patch -Np1 -i $srcdir/17-dwm-6.0-statuscolors.diff
   patch -Np1 -i $srcdir/gaps.diff
   sed -i 's/CPPFLAGS =/CPPFLAGS +=/g' config.mk
