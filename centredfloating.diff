@@ -1,0 +1,11 @@
+--- a/dwm.c	2012-02-08 21:39:01.455020443 +0200
++++ b/dwm.c	2012-02-08 21:39:01.458020443 +0200
+@@ -91,7 +91,7 @@
+ 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
+ 	int bw, oldbw;
+ 	unsigned int tags;
+-	Bool isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
++	Bool isfixed, isfloating, isurgent, neverfocus, oldstate, isfullscreen, iscentred;
+ 	Client *next;
+ 	Client *snext;
+ 	Monitor *mon;
