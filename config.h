@@ -7,15 +7,15 @@ static const char colors[MAXCOLORS][ColLast][8] = {
 	{ "#333333", "#aaaaaa", "#052111" }, /* 0 = normal */
 	{ "#14915f", "#14915f", "#052111" }, /* 1 = selected */
 	{ "#FF1881", "#FFFFFF", "#FF1881" }, /* 2 = urgent */
-	{ "#222222", "#53A6A6", "#1A1919" }, /* 3 = green */
-	{ "#222222", "#BF85CC", "#1A1919" }, /* 4 = yellow */
-	{ "#222222", "#6096BF", "#1A1919" }, /* 5 = cyan */
-	{ "#222222", "#7E62B3", "#1A1919" }, /* 6 = magenta */
-	{ "#222222", "#899CA1", "#1A1919" }, /* 7 = grey */
+	{ "#333333", "#38b856", "#1A1919" }, /* 3 = green */
+	{ "#333333", "#000000", "#38b856" }, /* 4 = yellow */
+	{ "#333333", "#6096BF", "#1A1919" }, /* 5 = cyan */
+	{ "#333333", "#7E62B3", "#1A1919" }, /* 6 = magenta */
+	{ "#333333", "#899CA1", "#1A1919" }, /* 7 = grey */
 };
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 20;        /* snap pixel */
-static const unsigned int gappx		= 3;		/* gap pixel width */
+static const unsigned int gappx		= 2;		/* gap pixel width */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 static const Bool clicktofocus      = True;     /* Change focus only on click */
@@ -69,6 +69,7 @@ static const Tag tags[] = {
 static const char terminal[]		= "urxvt";
 static const char *dmenucmd[]		= { "dmenu_run", "-i", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG],"-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
 static const char *mymenucmd[]		= { "/home/ian/bin/dmenu_custom.bash", NULL };
+static const char *mygtkmenucmd[]	= { "/home/ian/bin/scripts/mygtkmenu.py", NULL };
 static const char *termcmd[]		= { terminal, NULL };
 static const char *emacscmd[]		= { "/home/ian/bin/emet", NULL };
 static const char *filemancmd[]		= { "dolphin", NULL };
@@ -128,6 +129,7 @@ static Key keys[] = {
 /* click can be ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
 	/* click                event mask      button          function        argument */
+	{ ClkRootWin,			0,				Button2,		spawn,			{.v = mygtkmenucmd } },
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
