@@ -1,17 +1,18 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "-misc-fixed-medium-r-semicondensed--13-120-75-75-c-*-iso8859-2";
+/*static const char font[]            = "-misc-fixed-medium-r-semicondensed--13-120-75-75-c-*-iso8859-2";*/
+static const char font[]            = "-*-ohsnap.icons-medium-r-normal-*-11-79-100-100-C-60-ISO8859-1";
 static const char colors[MAXCOLORS][ColLast][8] = {
 	/* border     fg         bg       */
-	{ "#333333", "#aaaaaa", "#052111" }, /* 0 = normal */
-	{ "#14915f", "#14915f", "#052111" }, /* 1 = selected */
+	{ "#666666", "#aaaaaa", "#222222" }, /* 0 = normal */
+	{ "#426797", "#4abcd4", "#222222" }, /* 1 = selected */
 	{ "#FF1881", "#FFFFFF", "#FF1881" }, /* 2 = urgent */
-	{ "#333333", "#38b856", "#1A1919" }, /* 3 = green */
-	{ "#333333", "#000000", "#38b856" }, /* 4 = yellow */
-	{ "#333333", "#6096BF", "#1A1919" }, /* 5 = cyan */
-	{ "#333333", "#7E62B3", "#1A1919" }, /* 6 = magenta */
-	{ "#333333", "#899CA1", "#1A1919" }, /* 7 = grey */
+	{ "#333333", "#8f8f8f", "#222222" }, /* 3 = x04 = normal status bar */
+	{ "#333333", "#e0e0e0", "#222222" }, /* 4 = x05 = data */
+	{ "#333333", "#4abcd4", "#222222" }, /* 5 = x06 = highlight */
+	{ "#333333", "#cd5666", "#222222" }, /* 6 = x07 = critical CPU/batter */
+	{ "#333333", "#899CA1", "#1A1919" }, /* 7 = x08 = */
 };
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 20;        /* snap pixel */
@@ -19,7 +20,6 @@ static const unsigned int gappx		= 2;		/* gap pixel width */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 static const Bool clicktofocus      = True;     /* Change focus only on click */
-
 
 static const Rule rules[] = {
 	/* class		instance    title       tags mask     isFloating   isCentred	monitor */
@@ -69,33 +69,33 @@ static const Tag tags[] = {
 static const char terminal[]		= "urxvt";
 static const char *dmenucmd[]		= { "dmenu_run", "-i", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG],"-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
 static const char *mymenucmd[]		= { "/home/ian/bin/dmenu_custom.bash", NULL };
-static const char *mygtkmenucmd[]	= { "/home/ian/bin/scripts/mygtkmenu.py", NULL };
+static const char *mygtkmenucmd[]	= { "/home/ian/bin/mygtkmenu.py", NULL };
 static const char *termcmd[]		= { terminal, NULL };
 static const char *emacscmd[]		= { "/home/ian/bin/emet", NULL };
 static const char *filemancmd[]		= { "dolphin", NULL };
 static const char *browsercmd[]		= { "firefox", NULL };
-static const char *altbrowsercmd[]	= { "luakit", NULL };
-static const char *volmcmd[]		= { "amixer", "-q", "sset", "Master", "toggle", NULL };
-static const char *voldcmd[]		= { "amixer", "-q", "sset", "Master", "1-", "unmute", NULL };
-static const char *volucmd[]		= { "amixer", "-q", "sset", "Master", "1+", "unmute", NULL };
+static const char *volmcmd[]		= { "volosd.sh", "mute", NULL };
+static const char *voldcmd[]		= { "volosd.sh", "down", "-i", "1", NULL };
+static const char *volucmd[]		= { "volosd.sh", "up", "-i", "1", NULL };
 static const char *slrhcmd[]		= { "/home/ian/bin/slrh.sh", NULL };
 
 static Key keys[] = {
 	/* modifier                     key         function        argument */
 	{ MODKEY,                       XK_p,		spawn,          {.v = dmenucmd } },
 	{ MODKEY,			            XK_Return,  spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_w,		spawn,			{.v = mymenucmd } },
+	{ MODKEY|ShiftMask,             XK_p,		spawn,			{.v = mymenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return,	spawn,			{.v = emacscmd } },
 	{ MODKEY,                       XK_t,       spawn,          {.v = filemancmd } },
-	{ MODKEY,                       XK_f,       spawn,          {.v = browsercmd } },
-	{ MODKEY,                       XK_c,       spawn,          {.v = altbrowsercmd } },
+	{ MODKEY,                       XK_w,       spawn,          {.v = browsercmd } },
 	{ MODKEY,						XK_b,		togglebar,		{0} },
 	{ MODKEY,                       XK_j,       focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,       focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_a,       incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_z,       incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,       setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,       setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_h,       focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_l,       focusstack,     {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_h,       setmfact,       {.f = -0.05} },
+	{ MODKEY|ControlMask,           XK_l,       setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_j,       pushdown,       {0} },
 	{ MODKEY|ShiftMask,             XK_k,       pushup,         {0} },
 	{ MODKEY,                       XK_Tab,		view,			{0} },
